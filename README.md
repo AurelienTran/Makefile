@@ -9,6 +9,7 @@ code and Makefile should be able to build your program.
 Name  | Description
 ------|------------
 all   | Build the program
+run   | Run the program
 clean | Remove generated program and other temporary file
 
 ## Features
@@ -19,7 +20,6 @@ clean | Remove generated program and other temporary file
 
 ## Future work
 * Add dist target to generate zip file containing the entire project.
-* Add run target to run the build program.
 * Add check target to run test on the build program (still have to think on how to handle this).
 * Add Makefile for C++ Project.
 

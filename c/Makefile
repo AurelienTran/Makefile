@@ -45,16 +45,22 @@ DEPENDS = $(SOURCES:$(SRC_PATH)/%.c=$(BIN_PATH)/%.d)
 
 # User friendly output unless verbose
 COMPILE = @echo "[Compile] $@" && $(CC)
-LINK    = @echo "[Link] $@" && $(CC) 
+LINK    = @echo "[Link] $@" && $(CC)
 ifeq ($(VERBOSE),true)
 		COMPILE = $(CC)
-		LINK    = $(CC) 
+		LINK    = $(CC)
 endif
 
 
 # Main target
 .PHONY: all
 all: $(TARGET)
+
+
+# Run build program
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
 
 
 # Remove all build files
@@ -65,7 +71,7 @@ clean:
 
 # Target build
 $(TARGET): $(OBJECTS)
-	$(LINK) $(OBJECTS) $(LD_FLAGS) -o $@ 
+	$(LINK) $(OBJECTS) $(LD_FLAGS) -o $@
 
 
 # Object build

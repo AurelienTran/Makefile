@@ -5,7 +5,7 @@
 # The C program name
 BIN_NAME = MyProgram
 
-# C Compiler
+# C Compiler (gcc, clang, ...)
 CC = clang
 
 # Preprocessor Flags
@@ -23,6 +23,9 @@ SRC_PATH = ./src
 # Path to the build directory
 BIN_PATH = ./build
 
+# Zip tool for generating archive
+ZIP_TOOL = zip
+
 
 #######################################
 # Setting for auto building C Program #
@@ -37,7 +40,8 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 
 
 # Define list of file
-TARGET  = $(BIN_PATH)/$(BIN_NAME)
+TARGET  = $(BIN_NAME)
+ZIPFILE = $(BIN_NAME).zip
 SOURCES = $(call rwildcard, $(SRC_PATH), *.c)
 OBJECTS = $(SOURCES:$(SRC_PATH)/%.c=$(BIN_PATH)/%.o)
 DEPENDS = $(SOURCES:$(SRC_PATH)/%.c=$(BIN_PATH)/%.d)
@@ -46,9 +50,11 @@ DEPENDS = $(SOURCES:$(SRC_PATH)/%.c=$(BIN_PATH)/%.d)
 # User friendly output unless verbose
 COMPILE = @echo "[Compile] $@" && $(CC)
 LINK    = @echo "[Link] $@" && $(CC)
+ZIP     = @echo "[Archive] $@" && $(ZIP_TOOL)
 ifeq ($(VERBOSE),true)
-		COMPILE = $(CC)
-		LINK    = $(CC)
+	COMPILE = $(CC)
+    	LINK    = $(CC)
+	ZIP     = $(ZIP_TOOL)
 endif
 
 
@@ -66,7 +72,17 @@ run: $(TARGET)
 # Remove all build files
 .PHONY: clean
 clean:
-	$(RM) $(TARGET) $(OBJECTS) $(DEPENDS)
+	$(RM) $(TARGET) $(OBJECTS) $(DEPENDS) $(ZIPFILE)
+
+
+# Create zip archive
+.PHONY: dist
+dist: $(ZIPFILE)
+
+
+# Zip build
+$(ZIPFILE): clean
+	$(ZIP) $@ *
 
 
 # Target build

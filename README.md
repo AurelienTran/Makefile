@@ -8,9 +8,10 @@ code and Makefile should be able to build your program.
 ## Target
 Name  | Description
 ------|------------
-all   | Build the program
-run   | Run the program
-clean | Remove generated program and other temporary file
+all   | Build the program.
+run   | Run the program.
+clean | Remove generated program and other temporary file.
+dist  | Create zip file containing current project after clean is run.
 
 ## Features
 * Recusively search all source files in the source directory and compile them.
@@ -19,7 +20,6 @@ clean | Remove generated program and other temporary file
 * Separate source file and build file to keep the development environment clean.
 
 ## Future work
-* Add dist target to generate zip file containing the entire project.
 * Add check target to run test on the build program (still have to think on how to handle this).
 * Add Makefile for C++ Project.
 

@@ -3,7 +3,7 @@
 ###################
 
 # The C program name
-BIN_NAME = MyProgram
+BIN_NAME = helloworld
 
 # C Compiler (gcc, clang, ...)
 CC = clang
@@ -23,7 +23,7 @@ SRC_PATH = ./src
 # Path to the build directory
 BIN_PATH = ./build
 
-# Zip tool for generating archive
+# Zip tool for dist target
 ZIP_TOOL = zip
 
 
